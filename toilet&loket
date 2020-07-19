@@ -1,0 +1,368 @@
+#include<windows.h>
+#include<gl/glut.h>
+#include "math.h"
+
+void init(void);
+void tampil(void);
+void keyboard(unsigned char key, int, int);
+void mouse(int button, int state, int x, int y);
+void mouseMotion(int x, int y);
+void ukuran(int, int);
+void loket();
+void toilet();
+
+float xrot=0.0f;
+float yrot=0.0f;
+float xdiff=0.0f;
+float ydiff=0.0f;
+bool mouseDown=false;
+int is_depth;
+
+int main(int argc, char **argv){
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitWindowSize(800, 600);
+	glutInitWindowPosition(250, 80);
+	glutCreateWindow("672018174 - 672018084 - 672018217");
+	init();
+	glutDisplayFunc(tampil);
+	glutReshapeFunc(ukuran);
+	glutMouseFunc(mouse);
+	glutMotionFunc(mouseMotion);
+	glutKeyboardFunc(keyboard);
+	glutMainLoop();
+	return 0;
+}
+
+void init(void){
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glMatrixMode(GL_PROJECTION);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_DEPTH_TEST);
+    glLineWidth(3);
+    is_depth=1;
+    glMatrixMode(GL_MODELVIEW);
+}
+
+const double phi = 3.141592653589793;
+int i;
+
+void loket(){
+    //loket1
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-40,-30,110);
+    glVertex3f(-40,-10,110);
+    glVertex3f(-40,-10,115);
+    glVertex3f(-40,-30,115);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-40,-30,110);
+    glVertex3f(-25,-30,110);
+    glVertex3f(-25,-10,110);
+    glVertex3f(-40,-10,110);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-25,-30,110);
+    glVertex3f(-25,-10,110);
+    glVertex3f(-25,-10,115);
+    glVertex3f(-25,-30,115);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-40,-30,115);
+    glVertex3f(-25,-30,115);
+    glVertex3f(-25,-10,115);
+    glVertex3f(-40,-10,115);
+    glEnd();
+
+    //pintu loket
+    glBegin(GL_POLYGON);
+	glColor3f(0.85,0.85,0.7);
+    glVertex3f(-38,-28,115.1);
+    glVertex3f(-38,-13,115.1);
+    glVertex3f(-33,-13,115.1);
+    glVertex3f(-33,-28,115.1);
+    glEnd();
+
+    //jendela loket
+    glBegin(GL_POLYGON);
+	glColor3f(0.85,0.85,0.7);
+    glVertex3f(-32,-23,115.1);
+    glVertex3f(-32,-13,115.1);
+    glVertex3f(-26,-13,115.1);
+    glVertex3f(-26,-23,115.1);
+    glEnd();
+
+    //atap loket
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-42,-10,108);
+    glVertex3f(-23,-10,108);
+    glVertex3f(-23,-10,117);
+    glVertex3f(-42,-10,117);
+    glEnd();
+
+    //loket2
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(40,-30,110);
+    glVertex3f(40,-10,110);
+    glVertex3f(40,-10,115);
+    glVertex3f(40,-30,115);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(40,-30,110);
+    glVertex3f(25,-30,110);
+    glVertex3f(25,-10,110);
+    glVertex3f(40,-10,110);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(25,-30,110);
+    glVertex3f(25,-10,110);
+    glVertex3f(25,-10,115);
+    glVertex3f(25,-30,115);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(40,-30,115);
+    glVertex3f(25,-30,115);
+    glVertex3f(25,-10,115);
+    glVertex3f(40,-10,115);
+    glEnd();
+
+    //pintu loket
+    glBegin(GL_POLYGON);
+	glColor3f(0.85,0.85,0.7);
+    glVertex3f(38,-28,115.1);
+    glVertex3f(38,-13,115.1);
+    glVertex3f(33,-13,115.1);
+    glVertex3f(33,-28,115.1);
+    glEnd();
+
+    //jendela loket
+    glBegin(GL_POLYGON);
+	glColor3f(0.85,0.85,0.7);
+    glVertex3f(32,-23,115.1);
+    glVertex3f(32,-13,115.1);
+    glVertex3f(26,-13,115.1);
+    glVertex3f(26,-23,115.1);
+    glEnd();
+
+    //atap loket
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(42,-10,108);
+    glVertex3f(23,-10,108);
+    glVertex3f(23,-10,117);
+    glVertex3f(42,-10,117);
+    glEnd();
+}
+
+void toilet(){
+    //tembok toilet
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-30,-30,-150);
+    glVertex3f(-30,-10,-150);
+    glVertex3f(-30,-10,-140);
+    glVertex3f(-30,-30,-140);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-30,-30,-150);
+    glVertex3f(30,-30,-150);
+    glVertex3f(30,-10,-150);
+    glVertex3f(-30,-10,-150);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(30,-30,-150);
+    glVertex3f(30,-10,-150);
+    glVertex3f(30,-10,-140);
+    glVertex3f(30,-30,-140);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+	glColor3f(1,1,1);
+    glVertex3f(-30,-30,-140);
+    glVertex3f(30,-30,-140);
+    glVertex3f(30,-10,-140);
+    glVertex3f(-30,-10,-140);
+    glEnd();
+
+    //atap toilet
+    glBegin(GL_POLYGON);
+    glColor3f(1,1,1);
+    glVertex3f(-35,-10,-135);
+    glVertex3f(-35,-10,-155);
+    glVertex3f(35,-10,-155);
+    glVertex3f(35,-10,-135);
+    glEnd();
+
+    //pintu toilet
+    glBegin(GL_POLYGON);
+    glColor3f(0.85,0.85,0.7);
+    glVertex3f(-25,-28,-139.9);
+    glVertex3f(-25,-12,-139.9);
+    glVertex3f(-15,-12,-139.9);
+    glVertex3f(-15,-28,-139.9);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.85,0.85,0.7);
+    glVertex3f(-5,-28,-139.9);
+    glVertex3f(-5,-12,-139.9);
+    glVertex3f(5,-12,-139.9);
+    glVertex3f(5,-28,-139.9);
+    glEnd();
+
+    glBegin(GL_POLYGON);
+    glColor3f(0.85,0.85,0.7);
+    glVertex3f(15,-28,-139.9);
+    glVertex3f(15,-12,-139.9);
+    glVertex3f(25,-12,-139.9);
+    glVertex3f(25,-28,-139.9);
+    glEnd();
+}
+
+void tampil(void){
+    glPushMatrix();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    gluLookAt(0,0,3,0,0,0,0,1,0);
+    glRotatef(xrot, 1, 0, 0);
+    glRotatef(yrot, 0, 1, 0);
+    loket();
+    toilet();
+    glPopMatrix();
+    glutSwapBuffers();
+}
+
+void keyboard(unsigned char key, int bx, int by){
+    switch (key)
+    {
+		//maju
+		case 'w':
+		case 'W':
+			glTranslatef(0, 0, 5);
+			break;
+
+		//kanan
+		case 'd':
+		case 'D':
+			glTranslatef(5, 0, 0);
+			break;
+
+		//mundur
+		case 's':
+		case 'S':
+			glTranslatef(0, 0, -5);
+			break;
+
+		//kiri
+		case 'a':
+		case 'A':
+			glTranslatef(-5, 0, 0);
+			break;
+
+		//atas
+		case '9':
+			glTranslatef(0, 5, 0);
+			break;
+
+		//bawah
+		case '0':
+			glTranslatef(0, -5, 0);
+			break;
+
+		//rotasi bawah
+		case 'k':
+		case 'K':
+			glRotatef(3, 1, 0, 0);
+			break;
+
+		//rotas atas
+		case 'i':
+		case 'I':
+			glRotatef(-3, 1, 0, 0);
+			break;
+
+		//rotasi kanan
+		case 'l':
+		case 'L':
+			glRotatef(3, 0, 1, 0);
+			break;
+
+		//rotasi kiri
+		case 'j':
+		case 'J':
+			glRotatef(-3, 0, 1, 0);
+			break;
+
+		//rotasi miring kiri
+		case '7':
+			glRotatef(3, 0, 0, 1);
+			break;
+
+		//rotasi miring kanan
+		case '8':
+			glRotatef(-3, 0, 0, 1);
+			break;
+
+		//buka objek
+    	case '5':
+        	if (is_depth)
+        	{
+            	is_depth = 0;
+            	glDisable(GL_DEPTH_TEST);
+        	}
+        	else
+        	{
+            	is_depth = 1;
+            	glEnable(GL_DEPTH_TEST);
+        	}
+		}
+		tampil();
+}
+
+void mouse(int button, int state, int x, int y){
+    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+        mouseDown = true;
+        xdiff = x - yrot;
+        ydiff = -y + xrot;
+    }
+    else
+    mouseDown = false;
+}
+
+void mouseMotion(int x, int y){
+    if(mouseDown){
+        yrot = x - xdiff;
+        xrot = y + ydiff;
+
+        glutPostRedisplay();
+    }
+}
+
+void ukuran(int lebar, int tinggi){
+    if(tinggi == 0) tinggi = 1;
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(140, lebar / tinggi, 5, 500);
+    glTranslatef(0, -5, -150);
+    glMatrixMode(GL_MODELVIEW);
+}
