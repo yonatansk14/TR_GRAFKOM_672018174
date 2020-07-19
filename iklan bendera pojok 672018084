@@ -10,9 +10,6 @@ void mouseMotion(int x, int y);
 void ukuran(int, int);
 void lapangan();
 void lingkaran();
-void kursi();
-void tembok();
-void tutup();
 
 float xrot=0.0f;
 float yrot=0.0f;
